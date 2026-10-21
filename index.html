@@ -141,7 +141,7 @@
       <li><a href="#viajes">Viajes grupales</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
-    <a class="btn btn-rojo" href="https://wa.me/573217843880" target="_blank" rel="noopener">Escríbenos</a>
+    <div class="nav-actions"><button class="lang-btn" type="button" aria-label="Switch to English">EN</button><a class="btn btn-rojo" href="https://wa.me/573217843880" target="_blank" rel="noopener">Escríbenos</a></div>
   </div>
 </nav>
 
@@ -354,6 +354,7 @@
 
 <script src="marca.js"></script>
 <script src="carrusel.js"></script>
+<script src="i18n.js"></script>
 <script>
 // Pop-up del viaje destacado: una vez por visita, tras un momento
 (() => {
@@ -374,10 +375,10 @@ document.getElementById('lead').addEventListener('submit', e => {
   const f = e.target, msg = document.getElementById('msg');
   const name = f.name.value.trim();
   msg.hidden = false;
-  if (!name) { msg.textContent = 'Escribe tu nombre para que sepamos a quién responder.'; return; }
+  if (!name) { msg.textContent = wgT('Escribe tu nombre para que sepamos a quién responder.'); return; }
   const text = `Hola Wanna Go, soy ${name}. Me interesa un ${f.type.value.toLowerCase()}. ${f.msg.value.trim()}`.trim();
   window.open('https://wa.me/573217843880?text=' + encodeURIComponent(text), '_blank', 'noopener');
-  msg.textContent = 'Te abrimos WhatsApp con tu mensaje listo para enviar.';
+  msg.textContent = wgT('Te abrimos WhatsApp con tu mensaje listo para enviar.');
 });
 </script>
 </body>

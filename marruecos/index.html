@@ -196,6 +196,9 @@ footer .logo{color:#fff}
 .rv.pre{transform:translateY(30px);opacity:.3}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv.pre{transform:none;opacity:1}}
+.lang-btn{border:0;background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor;border-radius:999px;padding:8px 13px;font:600 13px var(--body);letter-spacing:.08em;cursor:pointer;transition:background .25s,color .25s}
+.lang-btn:hover{background:var(--coral);color:#fff;box-shadow:none}
+.nav-actions{display:flex;align-items:center;gap:10px}
 </style>
 <link rel="stylesheet" href="../carrusel.css">
 </head>
@@ -212,7 +215,7 @@ footer .logo{color:#fff}
       <li><a href="#precio">Inversión</a></li>
       <li><a href="#faq">Preguntas</a></li>
     </ul>
-    <a class="btn btn-coral" href="#reserva">Reservar</a>
+    <div class="nav-actions"><button class="lang-btn" type="button" aria-label="Switch to English">EN</button><a class="btn btn-coral" href="#reserva">Reservar</a></div>
   </div>
 </nav>
 
@@ -501,11 +504,12 @@ document.getElementById('lead').addEventListener('submit', e => {
   const f = e.target, msg = document.getElementById('msg');
   const name = f.name.value.trim(), wa = f.wa.value.trim();
   msg.hidden = false;
-  if (!name || wa.replace(/\D/g, '').length < 7) { msg.textContent = 'Escribe tu nombre y un WhatsApp válido para poder contactarte.'; return; }
-  msg.textContent = `¡Listo, ${name.split(' ')[0]}! Quedaste en la lista de espera. (Borrador: aún no se envían datos.)`;
+  if (!name || wa.replace(/\D/g, '').length < 7) { msg.textContent = wgT('Escribe tu nombre y un WhatsApp válido para poder contactarte.'); return; }
+  msg.textContent = wgLang === 'en' ? `Done, ${name.split(' ')[0]}! You're on the waiting list. (Draft: no data is sent yet.)` : `¡Listo, ${name.split(' ')[0]}! Quedaste en la lista de espera. (Borrador: aún no se envían datos.)`;
   f.reset();
 });
 </script>
 <script src="../carrusel.js"></script>
+<script src="../i18n.js"></script>
 </body>
 </html>
