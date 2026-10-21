@@ -187,6 +187,7 @@ const WG_EN = {
   "Unirme a la lista": "Join the list",
 
   "Escríbenos por WhatsApp": "Message us on WhatsApp",
+  "¿Planeamos tu viaje?": "Shall we plan your trip?",
   "06 · Lo que dicen": "06 · What people say",
   "Historias de quienes viajaron con nosotros": "Stories from people who traveled with us",
   "13 reseñas en Google": "13 Google reviews",
