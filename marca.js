@@ -13,14 +13,6 @@
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { threshold: .1 });
   document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
 
-  // Franja de fotos en bucle continuo
-  const strip = document.getElementById('strip');
-  if (strip) {
-    const n = strip.children.length;
-    strip.innerHTML += strip.innerHTML;
-    [...strip.children].forEach((f, i) => i >= n && f.setAttribute('aria-hidden', 'true'));
-  }
-
   // Parallax suave en la foto marcada
   const par = document.getElementById('par');
   if (par && !reduce) addEventListener('scroll', () => {

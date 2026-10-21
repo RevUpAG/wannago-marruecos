@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='20' fill='%23ED3237'/%3E%3Cpath d='M20 7a10 10 0 0 1 10 10c0 7-10 23-10 23S10 24 10 17A10 10 0 0 1 20 7z' fill='%23fff'/%3E%3Ccircle cx='20' cy='17' r='4.4' fill='%23ED3237'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="marca.css">
+<link rel="stylesheet" href="carrusel.css">
 <style>
 /* Home: bandas a sangre completa siguiendo la proporción del manual (petróleo 50 / blanco 20 / arena 15 / rojo 10 / agua 5) */
 .hero{position:relative;min-height:min(92svh,860px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--petroleo)}
@@ -73,14 +74,10 @@
 .badge.soon{background:rgba(255,255,255,.18);backdrop-filter:blur(6px)}
 
 /* destinos colombia: franja */
-.strip{overflow:hidden}
-.strip-track{display:flex;gap:16px;width:max-content;animation:drift 70s linear infinite}
-.strip:hover .strip-track{animation-play-state:paused}
 .strip figure{margin:0;flex:none;width:clamp(220px,24vw,330px);aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;position:relative}
 .strip figure:nth-child(even){margin-top:44px}
 .strip img{width:100%;height:100%;object-fit:cover}
 .strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 16px 14px;color:#fff;font-weight:500;font-size:15px;background:linear-gradient(transparent,rgba(31,42,44,.75))}
-@keyframes drift{to{transform:translateX(-50%)}}
 
 /* fundadora */
 .founder{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center}
@@ -89,7 +86,7 @@
 .founder blockquote{margin:0;font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.35}
 .founder .who{margin-top:24px;display:grid;gap:2px}
 .founder .who b{font-weight:600;font-size:18px}
-.founder .who span{color:#F7A3A5;font-size:15px}
+.founder .who span{color:var(--arena);opacity:.8;font-size:15px}
 
 /* frase */
 .quote{position:relative;color:#fff;text-align:center;overflow:hidden;background:var(--petroleo)}
@@ -107,6 +104,30 @@
 .channel:hover{transform:translateX(4px)}
 .channel small{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--agua)}
 .channel b{font-weight:500;color:var(--petroleo);word-break:break-word}
+
+/* pop-up: viaje destacado */
+.promo{border:0;padding:0;border-radius:14px;width:min(860px,calc(100% - 32px));max-height:calc(100svh - 32px);overflow:auto;background:var(--blanco);color:var(--ink);box-shadow:0 40px 80px -30px rgba(31,42,44,.6)}
+.promo::backdrop{background:rgba(31,42,44,.62);backdrop-filter:blur(4px)}
+.promo[open]{animation:pop .6s cubic-bezier(.2,.8,.2,1)}
+.promo[open]::backdrop{animation:fade .5s ease}
+@keyframes pop{from{transform:translateY(24px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}}
+.promo-in{display:grid;grid-template-columns:1fr 1.05fr}
+@media (max-width:720px){.promo-in{grid-template-columns:1fr}}
+.promo figure{margin:0;position:relative;min-height:260px;background:var(--petroleo)}
+.promo figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.promo figure .badge{position:absolute;left:18px;top:18px}
+.promo-body{padding:40px 36px 34px;display:grid;gap:16px;align-content:center}
+.promo-body h2{font-size:clamp(30px,3.6vw,42px);color:var(--petroleo)}
+.promo-body h2 em{font-style:normal;color:var(--rojo)}
+.promo-body .label{color:var(--agua)}
+.promo-facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:var(--muted)}
+.promo-facts b{color:var(--petroleo);font-weight:600}
+.promo-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.promo-close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border-radius:50%;border:0;background:var(--blanco);color:var(--petroleo);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 16px -8px rgba(31,42,44,.5);transition:transform .2s}
+.promo-close:hover{transform:rotate(90deg)}
+.promo-close svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.btn-quiet{color:var(--petroleo);box-shadow:inset 0 0 0 1.5px var(--line)}
 </style>
 </head>
 <body>
@@ -247,8 +268,8 @@
     <h2 class="h2">Conoce Colombia desde adentro</h2>
   </div>
 </section>
-<div class="strip" aria-label="Destinos en Colombia" style="padding-bottom:110px">
-  <div class="strip-track" id="strip">
+<div class="strip carousel" aria-label="Destinos en Colombia" style="padding-bottom:110px">
+  <div class="strip-track" tabindex="0">
     <figure><img src="fotos/guatape.jpg" alt="" loading="lazy"><figcaption>Guatapé</figcaption></figure>
     <figure><img src="fotos/comuna13.jpg" alt="" loading="lazy"><figcaption>Comuna 13, Medellín</figcaption></figure>
     <figure><img src="fotos/cartagena-casas.jpg" alt="" loading="lazy"><figcaption>Cartagena</figcaption></figure>
@@ -313,8 +334,40 @@
   </div>
 </footer>
 
+
+<dialog class="promo" id="promo" aria-labelledby="promo-title">
+  <button class="promo-close" type="button" aria-label="Cerrar" data-close><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <div class="promo-in">
+    <figure><img src="fotos/mujer-dunas.jpg" alt="Viajera sentada en las dunas del Sahara al atardecer"><span class="badge">Cupos abiertos</span></figure>
+    <div class="promo-body">
+      <span class="label">Viaje grupal · Solo mujeres</span>
+      <h2 id="promo-title">Marruecos <em>entre mujeres</em></h2>
+      <p>Medinas azules, palacios de mosaico y una noche bajo las estrellas del Sahara. Grupo pequeño, con anfitriona de Wanna Go de principio a fin.</p>
+      <div class="promo-facts"><span><b>10</b> días</span><span><b>7</b> destinos</span><span><b>16</b> viajeras máx.</span><span>Salida <span class="tbd">2027</span></span></div>
+      <div class="promo-actions">
+        <a class="btn btn-rojo" href="marruecos/">Ver el viaje</a>
+        <button class="btn btn-quiet" type="button" data-close>Ahora no</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <script src="marca.js"></script>
+<script src="carrusel.js"></script>
 <script>
+// Pop-up del viaje destacado: una vez por visita, tras un momento
+(() => {
+  const d = document.getElementById('promo');
+  if (!d || !d.showModal) return;
+  let seen = false;
+  try { seen = sessionStorage.getItem('wg-promo') === '1'; } catch (e) {}
+  const close = () => { d.close(); try { sessionStorage.setItem('wg-promo', '1'); } catch (e) {} };
+  d.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', close));
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('cancel', () => { try { sessionStorage.setItem('wg-promo', '1'); } catch (e) {} });
+  if (!seen) setTimeout(() => d.showModal(), 1400);
+})();
+
 // Formulario → abre WhatsApp con el mensaje armado
 document.getElementById('lead').addEventListener('submit', e => {
   e.preventDefault();
