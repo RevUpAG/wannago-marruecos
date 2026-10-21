@@ -186,6 +186,13 @@ const WG_EN = {
   "Doble compartida": "Shared double", "Individual": "Single", "Aún no sé": "Not sure yet",
   "Unirme a la lista": "Join the list",
 
+  "Escríbenos por WhatsApp": "Message us on WhatsApp",
+  "06 · Lo que dicen": "06 · What people say",
+  "Historias de quienes viajaron con nosotros": "Stories from people who traveled with us",
+  "13 reseñas en Google": "13 Google reviews",
+  "Reseñas de Google": "Google reviews",
+  "07 · Fundadora": "07 · Founder", "08 · Contacto": "08 · Contact",
+
   // mensajes generados por el código
   "Escribe tu nombre para que sepamos a quién responder.": "Please enter your name so we know who to reply to.",
   "Te abrimos WhatsApp con tu mensaje listo para enviar.": "We opened WhatsApp with your message ready to send.",
@@ -227,6 +234,7 @@ function wgApply(lang) {
     b.setAttribute('aria-label', lang === 'en' ? 'Cambiar a español' : 'Switch to English');
   });
   try { localStorage.setItem('wg-lang', lang); } catch (e) {}
+  dispatchEvent(new CustomEvent('wg-lang', { detail: lang }));
 }
 
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => wgApply(wgLang === 'en' ? 'es' : 'en')));
